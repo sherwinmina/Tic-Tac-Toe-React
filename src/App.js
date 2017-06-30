@@ -8,15 +8,22 @@ class App extends Component {
     super();
     this.state = {
       turn: 'X',
-      gameEnded: false
+      gameEnded: false,
+      board: Array(9).fill('')
     }
   }
   
   clicked(event) {
-    event.target.innerText = this.state.turn;
-    this.setState({
-      turn: this.state.turn == 'X' ? 'O' : 'X'
-    });
+    if(this.state.board[event.target.dataset.square] == '') {
+      this.state.board[event.target.dataset.square] = this.state.turn;
+      event.target.innerText = this.state.turn;
+      this.setState({
+        turn: this.state.turn == 'X' ? 'O' : 'X',
+        board: this.state.board
+      });
+
+      console.log(this.state.board);
+    }
   }
 
   render() {
@@ -26,15 +33,15 @@ class App extends Component {
           <h1>Tic-Tac-Toe</h1>
         </div>
         <div className="board" onClick={(e) => this.clicked(e)}>
-          <div className="square">1</div>
-          <div className="square">2</div>
-          <div className="square">3</div>
-          <div className="square"></div>
-          <div className="square"></div>
-          <div className="square"></div>
-          <div className="square"></div>
-          <div className="square"></div>
-          <div className="square"></div>
+          <div className="square" data-square="0"></div>
+          <div className="square" data-square="1"></div>
+          <div className="square" data-square="2"></div>
+          <div className="square" data-square="3"></div>
+          <div className="square" data-square="4"></div>
+          <div className="square" data-square="5"></div>
+          <div className="square" data-square="6"></div>
+          <div className="square" data-square="7"></div>
+          <div className="square" data-square="8"></div>
         </div>
       </div>
     );
